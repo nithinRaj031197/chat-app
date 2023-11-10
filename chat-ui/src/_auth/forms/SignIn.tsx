@@ -10,6 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import * as z from "zod";
 
 const formSchema = z.object({
@@ -68,7 +69,18 @@ const SignIn = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+
+        <Button className="w-full" type="submit">
+          Submit
+        </Button>
+        <div className="flex flex-col gap-4 sm:flex-row justify-between text-xs underline">
+          <Link to="" className="text-blue-700">
+            Forgot PassWord?
+          </Link>
+          <Link to="/sign-up" className="text-blue-700">
+            Don't have an account? Sign Up
+          </Link>
+        </div>
       </form>
     </Form>
   );

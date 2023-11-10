@@ -10,6 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 import * as z from "zod";
 
@@ -83,7 +84,14 @@ const SignUp = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button className="w-full" type="submit">
+          Submit
+        </Button>
+        <div className="text-xs underline flex flex-row-reverse">
+          <Link to="/sign-in" className=" text-blue-700">
+            Already have an account? Sign in
+          </Link>
+        </div>
       </form>
     </Form>
   );
