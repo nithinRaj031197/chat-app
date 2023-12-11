@@ -1,24 +1,16 @@
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 import * as z from "zod";
 
 const formSchema = z.object({
   fullname: z.string().min(2).max(50),
   email: z.string().email({ message: "Invalid email format" }),
-  password: z
-    .string()
-    .min(8, { message: "Password must be at least 8 characters long" }),
+  password: z.string().min(8, { message: "Password must be at least 8 characters long" }),
 });
 
 const SignUp = () => {
@@ -73,16 +65,17 @@ const SignUp = () => {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="Enter Password"
-                  type="password"
-                  {...field}
-                />
+                <Input placeholder="Enter Password" type="password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+        <div>
+          <Link to="/sign-in" className="text-blue-400 text-sm">
+            Already have an account? Sign in
+          </Link>
+        </div>
         <Button type="submit">Submit</Button>
       </form>
     </Form>

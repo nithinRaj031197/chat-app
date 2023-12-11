@@ -3,20 +3,24 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 import * as z from "zod";
 
-const formSchema = z.object({
-  email: z.string().email({ message: "Invalid email format" }),
-  password: z.string().min(8, { message: "Password must be at least 8 characters long" }),
-});
+const formSchema = z
+  .object({
+    password: z.string().min(8, { message: "Password must be at least 8 characters long" }),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"], // path of error
+  });
 
-const SignIn = () => {
+const ResetPassword = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
@@ -27,47 +31,40 @@ const SignIn = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
-        <p className="text-center text-3xl font-bold">Sign In</p>
-
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter email" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <p className="text-center text-3xl font-bold">Reset Password</p>
 
         <FormField
           control={form.control}
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>Enter New Password</FormLabel>
               <FormControl>
-                <Input placeholder="Enter Password" type="password" {...field} />
+                <Input placeholder="Enter New Password" type="password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <div className="flex justify-between">
-          <Link to="/forgot-password" className="text-blue-400 text-sm">
-            Forgot Password
-          </Link>
-          <Link to="/sign-up" className="text-blue-400 text-sm">
-            Don't have an account? Sign up
-          </Link>
-        </div>
-        <Button type="submit">Submit</Button>
+
+        <FormField
+          control={form.control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Confirm Password</FormLabel>
+              <FormControl>
+                <Input placeholder="Enter Confirm Password" type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <Button type="submit">Save Password</Button>
       </form>
     </Form>
   );
 };
 
-export default SignIn;
+export default ResetPassword;
