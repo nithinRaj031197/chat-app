@@ -2,15 +2,19 @@ import { FaArrowLeft } from "react-icons/fa";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Label } from "../ui/label";
 import { MdEdit } from "react-icons/md";
-import { Textarea } from "../ui/textarea";
 
-type Props = {};
+type ProfileProps = {
+  setIsProfile: (val: boolean) => void;
+};
 
-const Profile = (props: Props) => {
+const Profile = ({ setIsProfile }: ProfileProps) => {
   return (
     <div className="h-[100vh] flex-1">
       <div className="flex bg-slate-200 h-20 items-center gap-3 p-3">
-        <div className="text-2xl cursor-pointer">
+        <div
+          className="text-2xl cursor-pointer"
+          onClick={() => setIsProfile(false)}
+        >
           <FaArrowLeft />
         </div>
         <h2 className="text-2xl">Profile</h2>
@@ -25,7 +29,9 @@ const Profile = (props: Props) => {
 
       <div className="flex flex-col gap-20 p-3 mt-10">
         <div className="flex flex-col gap-4">
-          <Label className="text-slate-700 font-semibold text-lg">Your name</Label>
+          <Label className="text-slate-700 font-semibold text-lg">
+            Your name
+          </Label>
 
           <div className="flex justify-between gap-2 text-xl">
             {/* <input type="text" value="Nithin Raj" className=" " /> */}
@@ -37,7 +43,8 @@ const Profile = (props: Props) => {
           </div>
 
           <p className="text-slate-400 select-none">
-            This is not your username or pin. This name will be visible to your Chat Contacts
+            This is not your username or pin. This name will be visible to your
+            Chat Contacts
           </p>
         </div>
         <div className="flex flex-col gap-4">
