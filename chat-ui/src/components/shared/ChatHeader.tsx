@@ -13,11 +13,13 @@ const ChatHeader = (props: Props) => {
           <AvatarFallback>NR</AvatarFallback>
         </Avatar>
 
-        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">John Doe</h3>
+        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+          John Doe
+        </h3>
       </div>
 
       <div className="flex items-center text-2xl mr-5 ">
-        <Menu />
+        <Menu menuType="userProfile" />
       </div>
     </div>
   );

@@ -24,7 +24,27 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { CiMenuKebab } from "react-icons/ci";
 
-export function Menu() {
+type IMenuDetails = {
+  [key: string]: string[];
+};
+
+const menuDetails: IMenuDetails = {
+  myProfile: ["New Group", "Starred Messages", "Settings", "Logout"],
+  userProfile: [
+    "ContactInfo",
+    "Mute Notifications",
+    "Clear Chat",
+    "Delete Chat",
+    "Block",
+  ],
+};
+
+type MenuProps = {
+  menuType: string;
+};
+
+export function Menu({ menuType }: MenuProps) {
+  const dropDownMenu = menuDetails[menuType];
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -33,13 +53,13 @@ export function Menu() {
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuItem className="h-10">New Group</DropdownMenuItem>
-        <DropdownMenuItem className="h-10">Starred Messages</DropdownMenuItem>
-        <DropdownMenuItem className="h-10">Settings</DropdownMenuItem>
-        <DropdownMenuItem className="h-10">
-          <LogOut className="mr-2 h-4 w-4" />
-          Logout
-        </DropdownMenuItem>
+        {dropDownMenu?.map((item, index) => {
+          return (
+            <DropdownMenuItem key={index} className="h-10">
+              {item}
+            </DropdownMenuItem>
+          );
+        })}
       </DropdownMenuContent>
     </DropdownMenu>
   );
