@@ -2,6 +2,7 @@ import { IoMdAdd } from "react-icons/io";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import { BaseSyntheticEvent, KeyboardEvent, useContext, useEffect, useRef, useState } from "react";
 import { Message, MessageContext } from "@/context/MessageContext";
+import { Input } from "../ui/input";
 
 type Props = {};
 
@@ -42,10 +43,10 @@ const ChatFooter = (props: Props) => {
         <IoMdAdd />
       </div>
       <div className="flex-1 ">
-        <input
+        <Input
           ref={inputRef}
           value={message}
-          className="w-full p-2 rounded-lg"
+          className="w-full p-2 rounded-lg text-lg focus:outline-none focus:border-none focus-visible:border-none focus-visible:outline-non"
           onChange={handleMessage}
           onKeyDown={handleKeyboardEvent}
           placeholder="Type a message..."

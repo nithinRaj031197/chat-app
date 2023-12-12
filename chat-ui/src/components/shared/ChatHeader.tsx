@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { CiMenuKebab } from "react-icons/ci";
+
+import { Menu } from "./Menu";
 
 type Props = {};
 
@@ -15,8 +16,8 @@ const ChatHeader = (props: Props) => {
         <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">John Doe</h3>
       </div>
 
-      <div className="flex items-center text-2xl mr-5 cursor-pointer">
-        <CiMenuKebab />
+      <div className="flex items-center text-2xl mr-5 ">
+        <Menu />
       </div>
     </div>
   );
