@@ -8,8 +8,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { AuthContext } from "@/context/AuthContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -25,6 +27,9 @@ const formSchema = z.object({
 
 const SignIn = () => {
   const navigate = useNavigate();
+
+  const { storeLoginToken } = useContext(AuthContext);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,8 +45,8 @@ const SignIn = () => {
         "http://192.168.1.10:5001/auth/login",
         values
       );
-      console.log("Response:", response.data);
-      localStorage.setItem("token", response.data.access_token);
+      storeLoginToken(response.data.access_token);
+
       navigate("/");
     } catch (error) {
       console.error("Error:", error);

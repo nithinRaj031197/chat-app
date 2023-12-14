@@ -1,4 +1,6 @@
-import { Outlet } from "react-router-dom";
+import { AuthContext } from "@/context/AuthContext";
+import { useContext } from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
 const backgroundImageStyle = {
   backgroundImage: 'url("/auth_background.jpeg")',
@@ -10,6 +12,11 @@ const backgroundImageStyle = {
 };
 
 const AuthLayout = () => {
+  const { token } = useContext(AuthContext);
+
+  if (token) {
+    return <Navigate to="/" />;
+  }
   return (
     <section
       style={backgroundImageStyle}
