@@ -10,8 +10,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+
 import { Link, useNavigate } from "react-router-dom";
+
 import axios from "axios";
+
 
 import * as z from "zod";
 
@@ -96,12 +99,14 @@ const SignUp = () => {
             </FormItem>
           )}
         />
+
         <div>
           <Link to="/sign-in" className="text-blue-400 text-sm">
             Already have an account? Sign in
           </Link>
         </div>
         <Button type="submit">Submit</Button>
+
       </form>
     </Form>
   );
