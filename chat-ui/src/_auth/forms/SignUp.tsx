@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import * as z from "zod";
@@ -24,6 +24,8 @@ const formSchema = z.object({
 });
 
 const SignUp = () => {
+  const navigate = useNavigate();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,7 +42,7 @@ const SignUp = () => {
         "http://192.168.1.10:5001/auth/register",
         values
       );
-      console.log("Response:", response.data);
+      navigate("/sign-in");
     } catch (error) {
       console.error("Error:", error);
     }

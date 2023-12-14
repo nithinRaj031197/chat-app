@@ -23,6 +23,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { CiMenuKebab } from "react-icons/ci";
+import { useContext } from "react";
+import { AuthContext } from "@/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 type IMenuDetails = {
   [key: string]: string[];
@@ -45,6 +48,11 @@ type MenuProps = {
 
 export function Menu({ menuType }: MenuProps) {
   const dropDownMenu = menuDetails[menuType];
+
+  const { removeToken } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -55,7 +63,16 @@ export function Menu({ menuType }: MenuProps) {
       <DropdownMenuContent className="w-56">
         {dropDownMenu?.map((item, index) => {
           return (
-            <DropdownMenuItem key={index} className="h-10">
+            <DropdownMenuItem
+              key={index}
+              className="h-10"
+              onClick={() => {
+                if (item === "Logout") {
+                  removeToken();
+                  navigate("/sign-in");
+                }
+              }}
+            >
               {item}
             </DropdownMenuItem>
           );

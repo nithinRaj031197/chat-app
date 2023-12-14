@@ -1,11 +1,14 @@
 import { IoSearchSharp } from "react-icons/io5";
 import { FaArrowLeft } from "react-icons/fa";
 
-import { useState } from "react";
+import { BaseSyntheticEvent, useEffect, useState } from "react";
+import axios from "axios";
 
 type Props = {};
 
 const Searchbar = (props: Props) => {
+  const [searchInput, setsearchInput] = useState("");
+  const [debounceValue, setDebounceValue] = useState("");
   const [isInputFocused, setisInputFocused] = useState<boolean>(false);
 
   const handleInputFocus = () => {
@@ -15,6 +18,31 @@ const Searchbar = (props: Props) => {
   const handleInputBlur = () => {
     setisInputFocused(false);
   };
+
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setsearchInput(e.target.value);
+  };
+
+  useEffect(() => {
+    const timeout = setTimeout(async () => {
+      // setDebounceValue(searchInput);
+      try {
+        const response = await axios.get(
+          `http://192.168.1.10:5001/auth/search/${searchInput}`
+        );
+
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }, 500);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [searchInput]);
+
+  console.log(searchInput, debounceValue);
 
   return (
     <div className="flex items-center bg-slate-200 m-2 p-3 rounded-lg gap-5">
@@ -35,6 +63,7 @@ const Searchbar = (props: Props) => {
           className="text-lg outline-none border-none bg-transparent focus:outline-none focus:border-none focus-visible:border-none focus-visible:outline-none"
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
+          onChange={handleSearchInput}
         />
       </div>
     </div>
