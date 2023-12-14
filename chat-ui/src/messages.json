@@ -1,0 +1,103 @@
+{
+  "messages": [
+    {
+      "messageId": "msg1",
+      "userId": "user2",
+      "content": "Hello, everyone!",
+      "timestamp": "2023-12-11T10:00:00Z",
+      "status": "sent",
+      "reactions": [{ "userId": "user1", "emoji": "👍" }],
+      "attachments": []
+    },
+    {
+      "messageId": "msg2",
+      "userId": "user1",
+      "content": "Hi! Glad to be here.",
+      "timestamp": "2023-12-11T10:05:00Z",
+      "status": "sent",
+      "reactions": [],
+      "attachments": []
+    },
+    {
+      "messageId": "msg3",
+      "userId": "user2",
+      "content": "Great to see you all here!",
+      "timestamp": "2023-12-11T10:10:00Z",
+      "status": "sent",
+      "reactions": [{ "userId": "user1", "emoji": "👍" }],
+      "attachments": []
+    },
+    {
+      "messageId": "msg4",
+      "userId": "user1",
+      "content": "Hey, how's it going?",
+      "timestamp": "2023-12-11T10:15:00Z",
+      "status": "sent",
+      "reactions": [],
+      "attachments": []
+    },
+    {
+      "messageId": "msg5",
+      "userId": "user2",
+      "content": "It's going well, thanks!",
+      "timestamp": "2023-12-11T10:20:00Z",
+      "status": "sent",
+      "reactions": [],
+      "attachments": []
+    },
+    {
+      "messageId": "msg6",
+      "userId": "user1",
+      "content": "What's everyone up to?",
+      "timestamp": "2023-12-11T12:05:00Z",
+      "status": "sent",
+      "reactions": [],
+      "attachments": []
+    },
+    {
+      "messageId": "msg7",
+      "userId": "user2",
+      "content": "Just catching up on some work.",
+      "timestamp": "2023-12-11T12:10:00Z",
+      "status": "sent",
+      "reactions": [],
+      "attachments": []
+    },
+    {
+      "messageId": "msg8",
+      "userId": "user1",
+      "content": "I'm preparing for the upcoming project presentation.",
+      "timestamp": "2023-12-11T12:15:00Z",
+      "status": "sent",
+      "reactions": [],
+      "attachments": []
+    },
+    {
+      "messageId": "msg9",
+      "userId": "user2",
+      "content": "That sounds interesting!",
+      "timestamp": "2023-12-11T12:20:00Z",
+      "status": "sent",
+      "reactions": [],
+      "attachments": []
+    },
+    {
+      "messageId": "msg10",
+      "userId": "user1",
+      "content": "I'm here just relaxing after a busy day.",
+      "timestamp": "2023-12-11T12:25:00Z",
+      "status": "sent",
+      "reactions": [],
+      "attachments": []
+    },
+    {
+      "messageId": "msg11",
+      "userId": "user2",
+      "content": "Relaxing is important too!",
+      "timestamp": "2023-12-11T12:30:00Z",
+      "status": "sent",
+      "reactions": [],
+      "attachments": []
+    }
+  ]
+}

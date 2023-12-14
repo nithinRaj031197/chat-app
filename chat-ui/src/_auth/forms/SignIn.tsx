@@ -9,8 +9,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
+
 import * as z from "zod";
 
 const formSchema = z.object({
@@ -21,6 +24,7 @@ const formSchema = z.object({
 });
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -29,8 +33,19 @@ const SignIn = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    try {
+      const response = await axios.post(
+        "http://192.168.1.10:5001/auth/login",
+        values
+      );
+      console.log("Response:", response.data);
+      localStorage.setItem("token", response.data.access_token);
+      navigate("/");
+    } catch (error) {
+      console.error("Error:", error);
+    }
   }
 
   return (
@@ -70,17 +85,16 @@ const SignIn = () => {
           )}
         />
 
-        <Button className="w-full" type="submit">
-          Submit
-        </Button>
-        <div className="flex flex-col gap-4 sm:flex-row justify-between text-xs underline">
-          <Link to="" className="text-blue-700">
-            Forgot PassWord?
+        <div className="flex justify-between">
+          <Link to="/forgot-password" className="text-blue-400 text-sm">
+            Forgot Password
           </Link>
-          <Link to="/sign-up" className="text-blue-700">
-            Don't have an account? Sign Up
+          <Link to="/sign-up" className="text-blue-400 text-sm">
+            Don't have an account? Sign up
           </Link>
         </div>
+        <Button type="submit">Submit</Button>
+
       </form>
     </Form>
   );
