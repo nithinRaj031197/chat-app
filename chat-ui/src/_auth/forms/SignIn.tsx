@@ -11,7 +11,9 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+
 import { Link, useNavigate } from "react-router-dom";
+
 import * as z from "zod";
 
 const formSchema = z.object({
@@ -82,6 +84,7 @@ const SignIn = () => {
             </FormItem>
           )}
         />
+
         <div className="flex justify-between">
           <Link to="/forgot-password" className="text-blue-400 text-sm">
             Forgot Password
@@ -91,6 +94,7 @@ const SignIn = () => {
           </Link>
         </div>
         <Button type="submit">Submit</Button>
+
       </form>
     </Form>
   );
