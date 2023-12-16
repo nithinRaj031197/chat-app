@@ -1,3 +1,4 @@
+import axiosApi from "@/axios";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -10,7 +11,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { AuthContext } from "@/context/AuthContext";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 
@@ -41,10 +41,7 @@ const SignIn = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
     try {
-      const response = await axios.post(
-        "http://192.168.1.10:5001/auth/login",
-        values
-      );
+      const response = await axiosApi.post("/auth/login", values);
       storeLoginToken(response.data.access_token);
 
       navigate("/");
@@ -99,7 +96,6 @@ const SignIn = () => {
           </Link>
         </div>
         <Button type="submit">Submit</Button>
-
       </form>
     </Form>
   );

@@ -1,16 +1,29 @@
 import { IoSearchSharp } from "react-icons/io5";
 import { FaArrowLeft } from "react-icons/fa";
 
-import { BaseSyntheticEvent, useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import axiosApi from "@/axios";
+import { LoadingStateType, SearchUserResponse } from "@/types/global";
 
-type Props = {};
+type SearchbarProps = {
+  isInputFocused: boolean;
+  setisInputFocused: (val: boolean) => void;
+  setUserSearchList: (val: null) => void;
+  searchingUserStatus: (val: LoadingStateType) => void;
+  userSearchList: SearchUserResponse | null;
+  setsearchInput: (val: string) => void;
+  searchInput: string;
+};
 
-const Searchbar = (props: Props) => {
-  const [searchInput, setsearchInput] = useState("");
-  const [debounceValue, setDebounceValue] = useState("");
-  const [isInputFocused, setisInputFocused] = useState<boolean>(false);
-
+const Searchbar = ({
+  isInputFocused,
+  setisInputFocused,
+  setUserSearchList,
+  searchingUserStatus,
+  userSearchList,
+  setsearchInput,
+  searchInput,
+}: SearchbarProps) => {
   const handleInputFocus = () => {
     setisInputFocused(true);
   };
@@ -25,15 +38,17 @@ const Searchbar = (props: Props) => {
 
   useEffect(() => {
     const timeout = setTimeout(async () => {
-      // setDebounceValue(searchInput);
       try {
-        const response = await axios.get(
-          `http://192.168.1.10:5001/auth/search/${searchInput}`
-        );
+        searchingUserStatus("loading");
+        const response =
+          isInputFocused &&
+          (await axiosApi.get(`/auth/search/${searchInput}/1/5`));
+        setUserSearchList(response && response?.data);
 
-        console.log(response.data);
+        searchingUserStatus("success");
       } catch (error) {
         console.error(error);
+        searchingUserStatus("error");
       }
     }, 500);
 
@@ -42,12 +57,11 @@ const Searchbar = (props: Props) => {
     };
   }, [searchInput]);
 
-  console.log(searchInput, debounceValue);
-
   return (
     <div className="flex items-center bg-slate-200 m-2 p-3 rounded-lg gap-5">
       <div className="text-2xl">
-        {isInputFocused ? (
+        {isInputFocused ||
+        (userSearchList && userSearchList.users.length > 0) ? (
           <>
             <FaArrowLeft />
           </>
