@@ -13,10 +13,8 @@ import { useForm } from "react-hook-form";
 
 import { Link, useNavigate } from "react-router-dom";
 
-import axios from "axios";
-
-
 import * as z from "zod";
+import axiosApi from "@/axios";
 
 const formSchema = z.object({
   username: z.string().min(2).max(50),
@@ -41,10 +39,7 @@ const SignUp = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
     try {
-      const response = await axios.post(
-        "http://192.168.1.10:5001/auth/register",
-        values
-      );
+      const response = await axiosApi.post("/auth/register", values);
       navigate("/sign-in");
     } catch (error) {
       console.error("Error:", error);
@@ -106,7 +101,6 @@ const SignUp = () => {
           </Link>
         </div>
         <Button type="submit">Submit</Button>
-
       </form>
     </Form>
   );
